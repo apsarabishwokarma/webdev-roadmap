@@ -13,6 +13,70 @@
 - Comments are ignored by the JavaScript engine and do not affect the functionality of the program.
 - They are typically used to improve code readability and maintainability by providing context and explanations for other developers who may be reading or working on the code in the future.
 
+### Types of Comments in JavaScript
+
+1. Single-line comments: These comments start with // and continue until the end of the line. They are used for brief explanations or notes.
+
+```javascript
+// This is a single-line comment
+let x = 5; // This is another single-line comment
+```
+
+2. Multi-line comments: These comments start with /_ and end with _/. They can span multiple lines and are used for longer explanations or to comment out blocks of code.
+
+```javascript
+/* This is a multi-line comment
+   It can span multiple lines
+   and is useful for longer explanations */
+let y = 10; /* This is a multi-line comment that can also be used for inline comments */
+```
+
+### Coercion and Type Conversion in JavaScript
+
+- Coercion is JavaScript automatically converting one type into another in order to perform the operation.
+
+Coercion = Automatic Type Conversion
+
+- Coercion is the automatic or implicit conversion of values from one data type to another. JavaScript will attempt to convert the value to the expected type in order to perform the operation. For example, when you use the + operator with a string and a number, JavaScript will coerce the number to a string and concatenate them together.
+
+Example
+console.log("5" + 2); // "52"
+console.log("5" - 2); // 3
+
+- Note:
+- Why Results Differ
+  for the + Operator
+
+- If one operand is a string, JavaScript performs string concatenation."5" + 2 // "52"
+
+- Other Operators (-, \*, /)
+  Convert operands to numbers."5" - 2 // 3
+
+- In the first example, JavaScript converts 2 to "2" and joins the strings. In the second example, JavaScript converts "5" to a number and performs subtraction.
+
+- JavaScript converts 2 to "2" and joins the strings.
+  "6" / 2 // 3
+  true + 1 // 2
+  false + 1 // 1
+  null + 1 // 1
+  undefined + 1 // NaN
+
+#### Truthiness in JavaScript
+
+- Every value in JavaScript is treated as either truthy or falsy in a boolean context.
+- Truthiness refers to the concept of how values are evaluated in a boolean context.
+- In JavaScript, certain values are considered "truthy" (evaluating to true) and others are considered "falsy" (evaluating to false) when used in conditional statements or logical operations .
+
+- For example:
+- if (value) {
+  // truthy
+  } else {
+  // falsy
+  }
+
+- Falsy values include: false, 0, -0, 0n (BigInt zero), "", null, undefined, and NaN.
+- All other values are considered truthy, including non-empty strings, non-zero numbers, objects, and arrays.
+
 ### 2. What is Value in JavaScript?What are the different Value Types in JavaScript?
 
 - Value is the piece of data that can be stored , retrieved and manipulated in a program.
@@ -37,7 +101,7 @@
 - const : It is block-scoped and cannot be updated or redeclared.The scope of a const variable is block scope.
 - It is used for variables that should remain constant throughout the program, such as configuration values or references to objects that should not be reassigned.
 - Example:
-  var name = "Alice";
+  var name = "Apsara";
   let age = 30;
   const PI = 3.14;
 
@@ -108,7 +172,7 @@ i. Object: Objects are used to store and organize data in a structured way.
 - Represents a collection of key-value pairs, where the keys are strings and the values can be of any type.
 - For example:
   let person = {
-  name: "Alice",
+  name: "Apsara",
   age: 30,
   isStudent: false
   };
@@ -122,7 +186,7 @@ Functions can be defined and called to execute the code they contain. For exampl
 function greet(name) {
 return "Hello, " + name + "!";
 }
-console.log(greet("Alice")); // Output: "Hello, Alice!"
+console.log(greet("Apsara")); // Output: "Hello, Alice!"
 
 ### 6. What is TTD in JavaScript?
 
@@ -425,7 +489,7 @@ i++;
   }
   Example
   let person = {
-  name: "Alice",
+  name: "Apsara",
   age: 30,
   city: "New York"
   };  
@@ -582,6 +646,303 @@ console.log("Always runs");
 - The throw statement is used to create and throw an error, which can be caught and handled by a try...catch block. It is typically used to indicate that something has gone wrong in the program and to provide information about the error. When a throw statement is executed, it immediately stops the execution of the current function and propagates the error up the call stack until it is caught by a catch block or reaches the global scope.
 - The return statement, on the other hand, is used to exit a function and optionally return a value to the caller. It is used to indicate that a function has completed its task and to provide a result back to the code that called the function. When a return statement is executed, it immediately stops the execution of the current function and returns the specified value (if any) to the caller.
 
+#### Function in JavaScript
+
+- A function is a reusable block of code that performs a specific task.
+- It can take inputs (parameters) and can return a value.
+- Functions are defined using the function keyword, followed by the function name, parentheses for parameters, and curly braces for the function body.
+- Syntax:
+
+  function functionName(parameters) {
+  // code
+  return value;
+  }
+
+- For example:
+
+- function greet() {
+  console.log("Hello");
+  }
+
+greet(); // Hello
+
+- function greet(name) {
+  return "Hello, " + name + "!";
+  }
+  console.log(greet("apsara")); // Output: "Hello, Alice!"
+
+function add(a, b) {
+return a + b;
+}  
+console.log(add(2, 3)); // Output: 5
+
+### parameters and arguments in JavaScript
+
+Parameter = A variable declared in the function definition., Parameters are placeholders.
+Argument = The actual value passed to the function call., Arguments are real values.
+
+- Parameters are the variables listed in the function definition, while arguments are the actual values passed to the function when it is called.
+- Parameters are local variables of the function and have block scope, meaning they are only accessible within the function.
+
+  For example:
+  function greet(name) { // 'name' is a parameter
+  return "Hello, " + name + "!";
+  }
+  console.log(greet("Apsara")); // 'Apsara' is an argument
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+add(10, 20);
+Item	Type
+a, b 	Parameters
+10, 20	Arguments
+
+```
+
+- Default Parameters
+- function greet(name = "Guest") {
+  console.log("Hello " + name);
+  }
+
+greet(); // Hello Guest
+
+- If no argument is passed, the default value is used.
+
+- Extra Arguments
+  function add(a, b) {
+  return a + b;
+  }
+
+add(1, 2, 3); // 3
+
+- Extra arguments are ignored unless you explicitly handle them.
+
+function sum (x,y){
+s = x+y;
+return s;
+}
+let result = sum(2,4);
+console.log(result);
+
+- Function Types in JavaScript:
+- Arrow Functions:
+- A compact way for writing a function .
+  A concise syntax for writing functions using the => syntax. They do not have their own this value and are often used for callbacks and functional programming.
+  syntax:
+
+parameters => {
+// code
+return value;
+} //This is called arrow function expression
+
+Syntax:
+const functionName = (parameters) => {
+// code
+return value;
+}
+
+(parameters) => {
+// code
+return value;
+
+} //This is called arrow function expression
+
+- It can be assigned to a variable or used as a callback function.
+  like we are naming this function as functionName and we can call it using functionName().
+
+- (a,b)=>{
+  console.log(a+b);
+  }
+
+- const sum = (a,b)=>{
+  return(a+b);
+  }
+
+- sum (2,3); // 5
+
+#### Anonymous Function
+
+A function without a name.
+
+()=>{
+console.log("Hello");
+}
+
+(name)=>{
+console.log("Hello " + name);
+}
+// This is an anonymous function expression
+
+const greet =()=>{
+console.log("Hello");
+} // This is a named function expression
+
+Note :
+
+1. A function can be assigned to a variable.
+
+function greet() {
+console.log("Hello");
+}
+
+const sayHello = greet;
+
+sayHello(); // Hello
+How It Works
+greet ──┐
+sayHello ──┘ → same function
+
+Both variables point to the same function.
+
+2. Passed as Arguments
+
+A function can be sent to another function as an argument.
+
+function greet() {
+console.log("Hello");
+}
+
+function execute(fn) {
+fn();
+}
+
+execute(greet); // Hello
+
+### Callback Function in JavaScript
+
+- A callback function is a function that is passed as an argument to another function and is executed after some operation has been completed.
+- It allows us to handle asynchronous operations and perform actions once a certain task is finished.
+- For example, when making an API call, we can pass a callback function that will be executed once the response is received. This way, we can handle the response data and update the UI accordingly without blocking the main thread of execution.
+
+#### Important Note
+
+execute(greet); // Pass the function
+execute(greet()); // Call the function immediately 3. Returned from Another Function
+
+3. A function can create and return another function.
+
+function outer() {
+return function () {
+console.log("Inner function");
+};
+}
+
+const inner = outer();
+inner(); // Inner function
+
+#### Pass by Value vs Object Reference
+
+JavaScript is technically pass-by-value only.
+
+However:
+
+Primitive values behave like pass-by-value.
+Objects behave like pass-by-sharing (often informally called pass-by-reference).
+
+1. Pass by Value
+
+- A copy of the value is passed to the function.
+- Changing the copy does not affect the original.
+- Primitive values are passed by value, meaning a copy of the value is passed to the function. Changes to the parameter do not affect the original variable.
+
+Example with Primitive Values
+let a = 10;
+let b = a;
+
+b = 20; // Change b to 20
+
+console.log(a); // 10 , a remains unchanged
+console.log(b); // 20
+Diagram
+a = 10
+b = copy of 10
+
+b changes to 20
+
+a = 10
+b = 20
+
+2. Pass by Reference
+
+- A reference/memory address to the original object is passed to the function.
+- Changing the parameter affects the original object.
+- Objects , array and functions are passed by reference, meaning a reference to the original object is passed to the function. Changes to the parameter will affect the original object.
+
+Example with Objects
+let user1 = { name: "Ram" };
+let user2 = user1;
+
+user2.name = "Hari";
+
+console.log(user1.name); // Hari
+console.log(user2.name); // Hari
+Diagram
+user1 ──┐
+├──> { name: "Ram" }
+user2 ──┘
+
+user2.name = "Hari"
+
+user1 ──┐
+├──> { name: "Hari" }
+user2 ──┘
+
+- When you copy the variable, both variables point to the same object.
+
+Primitive vs Object
+Type Behavior
+Number Pass by value
+String Pass by value
+Boolean Pass by value
+Null Pass by value
+Undefined Pass by value
+Object Reference is copied
+Array Reference is copied
+Function Reference is copied
+
+### Method in JavaScript
+
+- Function = Independent block of code
+- Method = Function attached to an object
+
+- Methods are functions that are associated with an object and can be called using the object. They are defined as properties of an object and can perform actions on the object's data.
+
+For example:
+ForEach() , map(), filter(), reduce() are methods of the Array object in JavaScript. They allow us to perform operations on arrays, such as iterating over elements, transforming data, filtering values, and reducing an array to a single value.
+
+### For Each Loop in JavaScript
+
+- The forEach() method is a built-in array method in JavaScript
+- Allows us to iterate over each element in an array and execute a provided function for each element.
+- It takes a callback function as an argument, which is executed for each element in the array.
+- The callback function can take three parameters: the current element, the index of the current element, and the array itself.
+
+Note:
+
+- forEach() is an array method that runs a callback for each element.
+- The forEach() method does not return a new array and cannot be used to break out of the loop.
+- For example:
+  let numbers = [1, 2, 3, 4, 5];
+  numbers.forEach(function(num) {
+  console.log(num);
+  });  
+  Output:
+  1
+  2
+  3
+  4
+  5
+
+### Map in JavaScript
+
+- The map() method is a built-in array method in JavaScript that creates a new array by applying a provided function to each element of the original array.
+- It takes a callback function as an argument, which is executed for each element in the array. The callback function can take three parameters: the current element, the index of the current element, and the array itself. The map() method returns a new array containing the results of applying the callback function to each element of the original array.
+
+### Filter in JavaScript
+
 #### String in javascript
 
 - A string is a sequence of characters enclosed in single quotes (' '), double quotes (" "), or backticks (` `) in JavaScript. It is used to represent text and can contain letters, numbers, symbols, and whitespace.
@@ -627,7 +988,7 @@ The original string is not modified; a new string is created.
 For example:
 let greeting = "Hello, World!";
 console.log(greeting); // Output: "Hello, World!"
-let name = "Alice";
+let name = "Apsara";
 let personalizedGreeting = greeting + " My name is " + name + ".";
 console.log(personalizedGreeting); // Output: "Hello, World! My name is Alice."
 
@@ -679,45 +1040,77 @@ String Methods in JavaScript
 
 ### Template Literals in JavaScript
 
-- A way to have embedded expression in a string
+- A way to have embedded expression in a string, use backticks (` `) instead of quotes.
+- Template literals allow for easier string interpolation and multi-line strings.
+-
 
 #### String Interpolation in JavaScript
 
 - String interpolation is the process of embedding expressions or variables within a string. In JavaScript, string interpolation can be achieved using template literals, which are enclosed by backticks (` `). Within a template literal, you can use the ${} syntax to embed expressions or variables directly into the string. For example:
-  let name = "Alice";
+  let name = "Apsara";
   let age = 30;
   let greeting = `My name is ${name} and I am ${age} years old.`;
   console.log(greeting); // Output: "My name is Alice and I am 30 years old."
 
-### What is Hoisting in JavaScript?
+#### Array in JavaScript
 
-- Hoisting is a behavior in JavaScript where variable and function declarations are moved to the top of their containing scope during the compilation phase. This means that you can use variables and functions before they are declared in the code. However, only the declarations are hoisted, not the initializations. For example:
-  console.log(x); // Output: undefined (due to hoisting)
-  var x = 5;
-  console.log(x); // Output: 5
+- Collection of items stored in a single variable.
+- An array is a data structure that can hold multiple values in a single variable. It is an ordered collection of elements, where each element can be of any type (such as numbers, strings, objects, etc.).
+- Arrays are defined using square brackets [] and the elements are separated by commas.
+- For example:
+  let numbers = [1, 2, 3, 4, 5];
+  let fruits = ["apple", "banana", "orange"];
+  let mixedArray = [1, "hello", true, { name: "Apsara" }, [1, 2, 3]];
+- Array is mutable, meaning you can change its contents after it is created. You can add, remove, or modify elements in an array using various array methods and operations.
+- For example:
+  let numbers = [1, 2, 3];
+  numbers.push(4); // Adds 4 to the end of the array
+  console.log(numbers); // Output: [1, 2, 3, 4]
+  numbers[0] = 0; // Modifies the first element of the array
+  console.log(numbers); // Output: [0, 2, 3, 4]
 
-Closure in JavaScript
+- Array Methods in JavaScript
+- Some commonly used array methods include:
+- push(): Adds one or more elements to the end of an array and returns the new length
+- pop(): Removes the last element from an array and returns that element.
+- shift(): Removes the first element from an array and returns that element.
+- unshift(): Adds one or more elements to the beginning of an array and returns the new length.
+- indexOf(): Returns the first index at which a given element can be found in the array, or -1 if it is not present.
+- slice(): Returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included).
+- splice(): Changes the contents of an array by removing or replacing existing elements and/or adding new elements in
+- sort(): Sorts the elements of an array in place and returns the sorted array.
+- forEach(): Executes a provided function once for each array element.
+- map(): Creates a new array populated with the results of calling a provided function on every element in the calling array.
+- filter(): Creates a new array with all elements that pass the test implementeded by the provided function.
+- reduce(): Executes a reducer function on each element of the array, resulting in a single output value.
+- find(): Returns the value of the first element in the array that satisfies the provided testing function.
+- includes(): Determines whether an array includes a certain value among its entries, returning true or false as appropriate.
+- toString(): Returns a string representing the specified array and its elements.
 
-- A closure is a feature in JavaScript where an inner function has access to the outer (enclosing) function's variables and parameters, even after the outer function has returned. This allows the inner function to "remember" the environment in which it was created, enabling powerful programming patterns such as data encapsulation and function factories. Closures are created whenever a function is defined inside another function, and they can be used to create private variables and functions that are not accessible from outside the closure. For example:
-  function outerFunction() {
-  let outerVariable = "I am from the outer function";
+```ts
+const fName = "Apsarey";
 
-  Arrow functions in JavaScript and how they differ from regular functions
+console.log(fName);
+console.log(fName.slice(0, 4));
+console.log(fName);
 
-- Arrow functions are a concise syntax for writing functions in JavaScript. They differ from regular functions in several ways:
-- Arrow functions do not have their own this value. Instead, they inherit the this value from the surrounding context. This makes them particularly useful for handling events and working with callbacks.
-- Arrow functions cannot be used as constructors and do not have a prototype property.
-- Arrow functions do not have the arguments object, but they can access the rest parameters if needed.
-- Arrow functions are always anonymous, meaning they do not have a name. However, they can be assigned to a variable or used as a callback function.
-- Example of an arrow function:
+const fArray = fName.split("");
+console.log(fArray);
+console.log(fArray.slice(0, 4)); // 0<=x>4 return garchha
+console.log(fArray);
+console.log(fArray.splice(0, 4)); //delete garne ai delete vako nai return
+console.log(fArray);
+```
 
-csr fast or ssr?
+### 11. What is the difference between slice and splice in JavaScript?
 
-- CSR (Client-Side Rendering) and SSR (Server-Side Rendering) are two different approaches to rendering web applications. The performance of each approach can vary depending on the specific use case and requirements of the application.
-- CSR can be faster for certain types of applications, especially those that require a lot of interactivity and dynamic content. This is because CSR allows the client to handle the rendering and updates, reducing the load on the server and improving responsiveness. However, CSR can also lead to slower initial load times, as the client needs to download and execute JavaScript before rendering the content.
-- SSR can provide faster initial load times, as the server generates the HTML and sends it to the client, allowing the content to be displayed more quickly. This can be beneficial for applications that rely heavily on SEO or need to provide a better user experience for users with slower internet connections. However, SSR can also lead to increased server load and slower performance for highly interactive applications, as the server needs to handle the rendering and updates for each request.
-- Ultimately, the choice between CSR and SSR depends on the specific needs of the application, the target audience, and the desired user experience. It is important to carefully consider the trade-offs and choose the approach that best fits the requirements of the project.
-
-Hydration in JavaScript
-
-- ## Hydration is the process of taking a server-rendered HTML page and attaching event listeners and other dynamic behavior to it on the client side. This allows the page to become interactive and responsive without requiring a full page reload. Hydration is commonly used in frameworks like React and Vue.js to enable server-side rendering while still providing a seamless user experience on the client side. During hydration, the JavaScript code runs after the initial HTML is loaded, allowing it to "hydrate" the static content with interactivity and dynamic features.
+- The slice() method returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included). It does not modify the original array. For example:
+  let arr = [1, 2, 3, 4, 5];
+  let slicedArr = arr.slice(0, 3);
+  console.log(slicedArr); // Output: [1, 2, 3]
+  console.log(arr); // Output: [1, 2, 3, 4, 5] (original array remains unchanged)
+- The splice() method changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. It modifies the original array and returns an array containing the deleted elements. For example:
+  let arr = [1, 2, 3, 4, 5];
+  let splicedArr = arr.splice(0, 3);
+  console.log(splicedArr); // Output: [1, 2, 3]
+  console.log(arr); // Output: [4, 5] (original array is modified)
