@@ -815,7 +815,60 @@ execute(greet); // Hello
 
 - A callback function is a function that is passed as an argument to another function and is executed after some operation has been completed.
 - It allows us to handle asynchronous operations and perform actions once a certain task is finished.
-- For example, when making an API call, we can pass a callback function that will be executed once the response is received. This way, we can handle the response data and update the UI accordingly without blocking the main thread of execution.
+- The callback function can take three parameters: the current element, the index of the current element, and the array itself. explain
+
+array.forEach(function (element, index, array) {
+// code
+});
+
+For example:
+let fruits = ["apple", "banana", "mango"];
+
+fruits.forEach(function (fruit, index, arr) {
+console.log("Value:", fruit);
+console.log("Index:", index);
+console.log("Array:", arr);
+});
+
+1st call:
+element = "apple"
+index = 0
+array = fruits
+
+2nd call:
+element = "banana"
+index = 1
+array = fruits
+and so on...
+
+- We can skip parameters if we don't need them.
+
+For example:
+
+fruits.forEach(function (\_, index) {
+console.log(index);
+});
+
+\_ is a common placeholder name for an unused parameter.
+
+Why do we write _ in forEach((_, index) => ...)?
+
+Because the first callback parameter receives the current element. \_ is a placeholder to ignore it so the second parameter can receive the index.
+
+If we want only the array, we still need placeholders for the first two.
+
+fruits.forEach(function (\_, \_\_, array) {
+console.log(array);
+});
+
+Or:
+
+fruits.forEach(function (unused1, unused2, array) {
+console.log(array);
+});
+
+Memory Rule
+To use the second or third callback parameter, you must keep placeholders for the earlier ones.
 
 #### Important Note
 
@@ -912,36 +965,6 @@ Function Reference is copied
 
 For example:
 ForEach() , map(), filter(), reduce() are methods of the Array object in JavaScript. They allow us to perform operations on arrays, such as iterating over elements, transforming data, filtering values, and reducing an array to a single value.
-
-### For Each Loop in JavaScript
-
-- The forEach() method is a built-in array method in JavaScript
-- Allows us to iterate over each element in an array and execute a provided function for each element.
-- It takes a callback function as an argument, which is executed for each element in the array.
-- The callback function can take three parameters: the current element, the index of the current element, and the array itself.
-
-Note:
-
-- forEach() is an array method that runs a callback for each element.
-- The forEach() method does not return a new array and cannot be used to break out of the loop.
-- For example:
-  let numbers = [1, 2, 3, 4, 5];
-  numbers.forEach(function(num) {
-  console.log(num);
-  });  
-  Output:
-  1
-  2
-  3
-  4
-  5
-
-### Map in JavaScript
-
-- The map() method is a built-in array method in JavaScript that creates a new array by applying a provided function to each element of the original array.
-- It takes a callback function as an argument, which is executed for each element in the array. The callback function can take three parameters: the current element, the index of the current element, and the array itself. The map() method returns a new array containing the results of applying the callback function to each element of the original array.
-
-### Filter in JavaScript
 
 #### String in javascript
 
@@ -1081,7 +1104,7 @@ String Methods in JavaScript
 - sort(): Sorts the elements of an array in place and returns the sorted array.
 - forEach(): Executes a provided function once for each array element.
 - map(): Creates a new array populated with the results of calling a provided function on every element in the calling array.
-- filter(): Creates a new array with all elements that pass the test implementeded by the provided function.
+- filter(): Creates a new array with all elements that pass the test implemented by the provided function.
 - reduce(): Executes a reducer function on each element of the array, resulting in a single output value.
 - find(): Returns the value of the first element in the array that satisfies the provided testing function.
 - includes(): Determines whether an array includes a certain value among its entries, returning true or false as appropriate.
@@ -1114,3 +1137,106 @@ console.log(fArray);
   let splicedArr = arr.splice(0, 3);
   console.log(splicedArr); // Output: [1, 2, 3]
   console.log(arr); // Output: [4, 5] (original array is modified)
+
+### For Each Loop in JavaScript
+
+- The forEach() method is a built-in array method in JavaScript
+- Allows us to iterate over each element in an array and execute a provided function for each element.
+- It takes a callback function as an argument, which is executed for each element in the array.
+- The callback function can take three parameters: the current element, the index of the current element, and the array itself.
+
+Note:
+
+- forEach() is an array method that runs a callback for each element.
+- The forEach() method does not return a new array and cannot be used to break out of the loop.
+- For example:
+  let numbers = [1, 2, 3, 4, 5];
+  numbers.forEach(function(num) {
+  console.log(num);
+  });  
+  Output:
+  1
+  2
+  3
+  4
+  5
+
+```javascript
+let city = ["Kathmandu", "Pokhara", "Lalitpur"];
+
+city.forEach(function (element, index, city) {
+  console.log("Value:", element);
+  console.log("Index:", index);
+  console.log("Array:", city);
+});
+```
+
+let city = ["Kathmandu", "Pokhara", "Lalitpur"];
+city.forEach(element, index ,city) => {
+
+console.log(element.toUpperCase(), index, city);
+
+});
+
+### Map in JavaScript
+
+- The map() method is a built-in array method in JavaScript that creates a new array by applying a provided function to each element of the original array.
+- It takes a callback function as an argument, which is executed for each element in the array. The callback function can take three parameters: the current element, the index of the current element, and the array itself.
+- Creates a new array by transforming each element.
+
+let numbers = [1, 2, 3, 4, 5];
+
+let doubled = numbers.map(num => num \* 2);
+
+console.log(doubled);
+// [2, 4, 6, 8, 10]
+
+### Filter in JavaScript
+
+- The filter() method is a built-in array method in JavaScript that creates a new array with all elements that pass a test implemented by the provided function.
+- It takes a callback function as an argument, which is executed for each element in the array. The callback function can take three parameters: the current element, the index of the current element, and the array itself.
+- Creates a new array with elements that pass a test.
+- For example:
+  let numbers = [1, 2, 3, 4, 5];
+  let evenNumbers = numbers.filter(num => num % 2 === 0);
+  console.log(evenNumbers);
+  // [2, 4]
+
+Comparison Table
+Feature forEach() map() filter()
+Loops through array -> Yes Yes Yes
+Returns a new array -> No Yes Yes
+Return value -> undefined Transformed array Filtered array
+Keeps same length -> N/A Yes Not necessarily
+Used for side effects -> Yes Sometimes Sometimes
+Used for transformation -> No Yes No
+Used for selection -> No No Yes
+
+### reduce() in JavaScript
+
+- The reduce() method is a built-in array method in JavaScript
+- performs some operation and reduce array to a single value. it returns a single value .
+-
+- It takes a callback function as an argument, which is executed for each element in the array. The callback function can take four parameters: the accumulator (the accumulated value from the previous iterations), the current element, the index of the current element, and the array itself. Additionally, reduce() can take an optional initial value as a second argument, which is used as the initial value of the accumulator.
+- Reduces an array to a single value by applying a function.
+
+For example:
+let numbers = [1, 2, 3, 4, 5];
+let sum = numbers.reduce((accumulator, current) => accumulator + current, 0);
+console.log(sum);
+// Output: 15
+accumulator/result = 0 (initial value)
+1st call: accumulator = 0 + 1 = 1
+2nd call: accumulator = 1 + 2 = 3
+
+array.reduce(res,curr)=>{
+
+}
+
+### 12. Higher-Order Functions (HOF) in JavaScript
+
+- A higher-order function is a function that takes another function as an argument or returns a function as its result. Like map(), filter(), reduce() are higher-order functions because they take a function as an argument to perform operations on arrays.
+
+- A higher-order function is a function that:
+  Takes another function as an parameter, or
+  Returns another function.
