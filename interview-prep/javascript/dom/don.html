@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM</title>
+  <style>
+    /* CSS selector used in query selector */
+
+    div {
+      color: red;
+    }
+
+    #containerId {
+      color: blue;
+    }
+
+    .containerClass {
+      color: green;
+    }
+
+    [data-label="dataA"] {
+      background-color: pink;
+    }
+
+    [class="containerClass"] {
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <div>Element</div>
+  <div id="containerId">Id</div>
+  <div class="containerClass">class</div>
+  <div data-label="dataA">Data Attribute</div>
+  <p id="text">Hello World</p>
+  <button id="btn" type="button">Change Color</button>
+
+
+  <input type="checkbox" name="hobby" value="coding">
+  coding
+  </input>
+  <input type="checkbox" name="hobby" value="cycling">
+  cycling
+  </input>
+  <input type="checkbox" name="hobby" value="swimming">
+  swimming
+  </input>
+  <input type="radio" name="gender" value="female">
+  F
+  </input>
+  <input type="radio" name="gender" value="male">
+  M
+  </input>
+
+  <script>
+    // Dom Selecting
+    const Tel = document.getElementsByTagName("div");
+    const idEl = document.getElementById("containerId");
+    const clEl = document.getElementsByClassName("containerClass"); // array
+    const daEl = document.querySelector(`[data-label="dataA"]`); // CSS Selectors
+    const allDivEl = document.querySelectorAll("div"); // returns array of element node not element
+    const text = document.getElementById("text");
+    const btn = document.getElementById("btn");
+
+    const checkEl = document.querySelectorAll('[name="hobby"]');
+
+    console.log({
+      Tel,
+      idEl,
+      clEl,
+      daEl,
+      allDivEl,
+      checkEl
+    });
+
+    // Changing html
+    //DOM allows JS to change both the text and the content of HTML elements.
+    //The innerHTML property is useful for getting or replacing the content of HTML elements.
+
+
+    idEl.innerHTML = "Ram";
+    idEl.innerHTML += " Sita"; //String concatenate
+
+    idEl.innerHTML += ` 
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWojVyCKnPv0zMJoMeKkRKDBx-0J_8vW6N7A&s" alt ="img"></img>
+    `
+
+    Array.from(clEl).forEach((el) => el.innerText += " Hello")
+
+    // clEl[0].innerText += "Hello"
+
+    // clEl.forEach((el) => el.innerText += " ok")  forEach not function in clEl
+    //document.write() can be used to write directly to the HTML output stream:
+    //Never use document.write() after the document is loaded. It will overwrite the document.
+
+
+
+
+
+
+
+
+
+
+    // changing css
+    //The HTML DOM allows JavaScript to change the style of HTML elements.
+    //document.getElementById(id).style.property= new style
+    //document.getElementById("containerId").style.color = "blue"
+
+    // allDivEl.forEach((el) => {
+    //   el.style.fontWeight = 800;
+
+    // })
+    allDivEl.forEach((el) => {
+      el.style.fontWeight = 800;
+      el.style.fontStyle = "italic";
+    })
+    // allDivEl.forEach((el) => el.style = 
+    // "font-style:italic;font-weight:800;")
+
+
+    //Using Events
+
+
+    text.addEventListener("mouseover", function () {
+      text.style.backgroundColor = "yellow";
+    });
+
+  
+
+
+    btn.addEventListener("click", function () {
+      text.style.color = "red";
+      btn.style.backgroundColor = "green";
+
+    });
+
+
+
+
+    // Form validations
+
+
+    
+
+
+    // Animations
+  </script>
+</body>
+
+</html>

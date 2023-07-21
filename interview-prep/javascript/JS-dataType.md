@@ -1240,3 +1240,150 @@ array.reduce(res,curr)=>{
 - A higher-order function is a function that:
   Takes another function as an parameter, or
   Returns another function.
+
+### Recursion in JavaScript
+
+- Recursion is a programming technique where a function calls itself in order to solve a problem.
+
+- Recursion is a technique where a function calls itself to solve a problem by breaking the problem into smaller, similar subproblems until a base condition is met.
+
+- It typically involves a base case that stops the recursion and a recursive case that breaks the problem into smaller subproblems.
+- A function that calls itself is called a recursive function.
+
+base case: The condition under which the recursion will stop. It prevents infinite recursion.
+recursive case: The part of the function that calls itself with modified arguments to approach the base case.
+
+- A function invokes itself during execution.
+- Works by dividing a problem into smaller subproblems.
+- Requires a base case to stop infinite calls.
+- Commonly used in problems like factorial, Fibonacci, and tree traversal.
+  It can be used to solve problems that can be broken down into smaller, similar subproblems, such as calculating factorials, Fibonacci numbers, or traversing data structures like trees and graphs.
+- Example of a recursive function to calculate the factorial of a number:
+
+  function factorial(n) {
+  if (n === 0) {
+  return 1; // Base case: factorial of 0 is 1
+  }
+  return n _ factorial(n - 1); // Recursive case: n! = n _ (n - 1)!
+  }
+
+### 13. What is the difference between a recursive function and an iterative function in JavaScript?
+
+- A recursive function is a function that calls itself in order to solve a problem by breaking it down into smaller, similar subproblems. It typically involves a base case that stops the recursion and a recursive case that breaks the problem into smaller subproblems. For example, a recursive function to calculate the factorial of a number would call itself with a smaller value until it reaches the base case of 0.
+- An iterative function, on the other hand, uses loops (such as for or while loops) to repeat a block of code until a certain condition is met. It does not involve self-calling and typically uses variables to keep track of the state of the computation. For example, an iterative function to calculate the factorial of a number would use a loop to multiply the numbers from 1 to n without calling itself.
+
+- Comparison Table
+  Feature Recursive Function Iterative Function
+  Definition A function that calls itself to solve a problem. A function that uses loops to repeat a block of code until a condition is met.
+  Base Case Required to stop infinite recursion. Not applicable.
+  State Management Implicitly managed through function calls. Explicitly managed through variables.
+  Performance Can lead to stack overflow if the recursion depth is too large. Generally more memory efficient for large inputs, as it does not involve multiple function calls.
+  Use Cases Suitable for problems that can be broken down into smaller, similar subproblems (e.g., tree traversal, Fibonacci). Suitable for problems that require repeated execution of a block of code (e.g., summing an array, factorial using a loop).
+
+### Factorial of a Number in JavaScript
+
+- The factorial of a non-negative integer n is the product of all positive integers less than or equal to n. It is denoted by n!. For example, 5! = 5*4*3*2*1 120. The factorial of 0 is defined to be 1 (0! = 1).
+  Why Is 0! = 1?
+  By mathematical definition, the factorial of zero is 1.
+  This makes recursive formulas work correctly.
+
+- formula:
+  n! = n (n - 1)! for n > 0
+  0! = 1
+- Example of a recursive function to calculate the factorial of a number:
+
+function factorial(n){
+if(!Number.isInteger(n)){
+
+throw new Error("Input must be a non-negative integer");
+}
+
+if (n < 0) {
+throw new Error("Input must be a non-negative integer");
+}
+
+//base case
+if (n === 0 || n === 1 )
+{
+
+return 1;
+
+}
+//recursive case
+return n \* factorial(n - 1);
+}
+
+console.log(factorial(5)); // Output: 120
+console.log(factorial(0)); // Output: 1
+console.log(factoral(-5)); // Throws an error
+console.log(factoral(3.5)); // Throws an error
+
+#### Iterative Solution (Using a Loop)
+
+function factorial(n) {
+let result = 1;
+
+for (let i = 2; i <= n; i++) {
+result \*= i;
+}
+
+return result;
+}
+
+console.log(factorial(5)); // 120
+
+#### Fibonacci Sequence in JavaScript
+
+- The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1. The sequence goes: 0, 1, 1, 2, 3, 5, 8, 13, and so on. The nth Fibonacci number can be calculated using the formula: F(n) = F(n-1) + F(n-2) with base cases F(0) = 0 and F(1) = 1.
+
+- Recursive Solution
+  function fibonacci(n) {
+  if (!Number.isInteger(n) || n < 0) {
+  throw new Error("Input must be a non-negative integer.");
+  }
+
+  // Base cases
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+
+  // Recursive case
+  return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+
+console.log(fibonacci(6)); // 8
+
+- Efficient Iterative Solution (Recommended)
+
+function fibonacci(n:number) {
+if (!Number.isInteger(n) || n < 0) {
+throw new Error("Input must be a non-negative integer.");
+}
+
+if (n === 0) return 0;
+if (n === 1) return 1;
+
+let prev = 0;
+let curr = 1;
+
+for (let i = 2; i <= n; i++) {
+let next = prev + curr;
+prev = curr;
+curr = next;
+}
+
+return curr;
+}
+const result = fibonacci(10);
+
+console.log (result); // 55
+
+### What Is a Palindrome?
+
+A palindrome is a word or number that reads the same forward and backward.
+
+"madam" → palindrome
+"racecar" → palindrome
+"121" → palindrome
+"hello" → not palindrome
+
+### Check if a String is a Palindrome in JavaScript
