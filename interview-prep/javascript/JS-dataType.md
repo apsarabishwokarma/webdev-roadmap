@@ -1138,6 +1138,63 @@ console.log(fArray);
   console.log(splicedArr); // Output: [1, 2, 3]
   console.log(arr); // Output: [4, 5] (original array is modified)
 
+1. slice()
+
+slice(start, end) returns a portion of a string or array.
+
+Includes start
+Excludes end
+Does not modify the original value
+String Example
+let str = "JavaScript";
+
+let result = str.slice(0, 4);
+
+console.log(result); // "Java"
+console.log(str); // "JavaScript"
+Array Example
+let nums = [10, 20, 30, 40, 50];
+
+let result = nums.slice(1, 4);
+
+console.log(result); // [20, 30, 40]
+console.log(nums); // [10, 20, 30, 40, 50] 2. splice()
+
+splice(start, deleteCount, ...items) changes the original array.
+
+Starts at start
+Removes deleteCount elements
+Optionally inserts new items
+Remove Elements
+let nums = [10, 20, 30, 40, 50];
+
+let removed = nums.splice(1, 2);
+
+console.log(removed); // [20, 30]
+console.log(nums); // [10, 40, 50]
+Replace Elements
+let nums = [10, 20, 30, 40];
+
+nums.splice(1, 2, 99, 100);
+
+console.log(nums); // [10, 99, 100, 40]
+
+### slice -> no change
+
+### splice -> special change
+
+Another Trick
+
+Both words contain slice, but:
+
+slice → just take a piece.
+splice → slice + extra work (remove/insert).
+
+The extra "p" can remind you of:
+
+- Permanent change
+- Put in / Pull out
+
 ### For Each Loop in JavaScript
 
 - The forEach() method is a built-in array method in JavaScript
