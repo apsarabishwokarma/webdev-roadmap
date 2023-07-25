@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Events</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h1>
+    Events: things that happen to HTML elements (button click, web page finish loading, mouse moves, keypress, input
+    change etc.)
+  </h1>
+
+
+  <!-- Mouse Events -->
+  <section>
+    <h2>Mouse Events</h2>
+    <!-- Inline event handlers (everything that starts with on) -->
+    <!-- <button 
+        id="mouse-button" 
+        onclick="clicked()"
+        onmousedown=""
+        onmouseenter=""
+        onmouseleave=""
+        onmousemove=""
+        onmouseup=""
+        onblur=""
+        ondblclick=""
+      >
+      Click Me
+    </button> -->
+
+    <button id="mouse-button">Click Me</button>
+    <button id="listener-button">Remove Listener</button>
+
+    <div id="mouse-box">Move mouse here</div>
+  </section>
+
+  <!-- Keyboard Events -->
+  <section>
+    <h2>Keyboard Events</h2>
+    <input id="keyboard-input" type="text" placeholder="Type here" />
+  </section>
+
+  <!-- Form Events -->
+  <section>
+    <h2>Form Events</h2>
+    <form id="my-form">
+      <input name="name" id="name-input" type="text" placeholder="Your name" />
+      <select name="role" id="role-select">
+        <option value="">Select role</option>
+        <option value="developer">Developer</option>
+        <option value="designer">Designer</option>
+      </select>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <!-- Window Events -->
+  <section>
+    <h2>Window Events</h2>
+    <p>Resize the browser window.</p>
+
+    <div id="scroll-box">
+      <div id="scroll-content">
+        Scroll inside this box to test scroll events.
+      </div>
+    </div>
+  </section>
+
+  <!-- Timing Events -->
+  <section>
+    <h2>Timing Events</h2>
+    <button id="timeout-button">Run setTimeout</button>
+    <button id="interval-button">Start setInterval</button>
+    <button id="stop-interval-button">Stop setInterval</button>
+  </section>
+
+  <!-- Event Bubbling vs Capturing -->
+  <section>
+    <h2>Event Bubbling vs Capturing</h2>
+    <p>Event bouncing, also known as event bubbling</p>
+
+    <div id="outer">
+      Outer
+      <div id="middle">
+        Middle
+        <button id="inner">Inner Button</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // All events starts with "on"
+
+    // Mouse Events: click, dblclick, mouseenter, mouseleave, mousemove, mousedown, mouseup
+    const mouseButton = document.getElementById('mouse-button');
+    const mouseBox = document.getElementById('mouse-box');
+
+    // Inline event handler's function used directly in HTML
+    function clicked() {
+      alert('Button clicked!');
+    }
+
+    // Using javaScript to add event listeners
+    mouseButton.onclick = () => {
+      alert('Mouse box clicked!');
+    }
+    mouseBox.onmousemove = (event) => {
+      // event.clientX and event.clientY give the mouse position relative to the viewport
+      mouseBox.textContent = `Mouse at (${event.clientX}, ${event.clientY})`;
+    }
+    mouseBox.onmouseleave = () => {
+      mouseBox.textContent = 'Move mouse here';
+    }
+    mouseBox.onmousedown = () => {
+      mouseBox.style.backgroundColor = 'lightblue';
+    }
+    mouseBox.onmouseup = () => {
+      mouseBox.style.backgroundColor = '';
+    }
+
+
+    // Keyboard Events: keydown, keyup, keypress
+    const keyboardInput = document.getElementById('keyboard-input');
+
+    // keydown: triggered when a key is pressed down
+    keyboardInput.onkeydown = (event) => {
+      console.log(`Key down: ${event.key}`);
+    }
+
+    // keyup: triggered when a key is released
+    keyboardInput.onkeyup = (event) => {
+      console.log(`Key up: ${event.key}`);
+    }
+
+    // keypress: like keydown but only for character keys (not recommended for use)
+    keyboardInput.onkeypress = (event) => {
+      console.log(`Key press: ${event.key}`);
+    }
+
+    // Form Events: submit, change, focus, blur
+    const myForm = document.getElementById('my-form');
+    const nameInput = document.getElementById('name-input');
+    const roleSelect = document.getElementById('role-select');
+
+    myForm.onsubmit = (event) => {
+      event.preventDefault(); // Prevent form from submitting and refreshing the page
+      alert(`Form submitted! Name: ${nameInput.value}, Role: ${roleSelect.value}`);
+    }
+
+    myForm.onchange = (e) => {
+      // for input type text, it triggers when the input loses focus
+      console.log(`Form changed: ${e.target.name} = ${e.target.value}`);
+    }
+
+    nameInput.onfocus = () => {
+      console.log('Name input focused');
+    }
+
+    nameInput.onblur = () => {
+      console.log('Name input blurred');
+    }
+
+
+    // Window Events: load, resize, scroll
+    const scrollBox = document.getElementById('scroll-box');
+    window.onload = () => {
+      console.log('Page loaded');
+    }
+
+    window.onresize = () => {
+      console.log(`Window resized to ${window.innerWidth}x${window.innerHeight}`);
+    }
+
+    scrollBox.onscroll = () => {
+      console.log(`Scroll position: ${scrollBox.scrollTop}`);
+    }
+
+    // Timing Events: setTimeout, setInterval
+    const timeoutButton = document.getElementById('timeout-button');
+    const intervalButton = document.getElementById('interval-button');
+    const stopIntervalButton = document.getElementById('stop-interval-button');
+
+    timeoutButton.onclick = () => {
+      setTimeout(() => {
+        alert('This is a delayed message!');
+      }, 2000); // 2 seconds delay, can be used for showing notifications, delaying actions, etc.
+    }
+
+    let intervalId; // to store the interval ID so we can clear it later
+    intervalButton.onclick = () => {
+      intervalId = setInterval(() => {
+        console.log('Interval message every 1 seconds');
+      }, 1000); // every 1 seconds
+    } // can be used to make a clock, update/polling live data, etc.
+
+    stopIntervalButton.onclick = () => {
+      clearInterval(intervalId);
+      console.log('Interval stopped');
+    }
+
+    // Event Listeners: addEventListener, removeEventListener
+    // All above examples use the "on" property to set event handlers
+    // but we can also use addEventListener for more flexibility
+    // Syntax: element.addEventListener(eventType, handlerFunction) , eventType is same as the "on" event name but without "on" prefix (e.g. "click" instead of "onclick")
+
+    // handler should be defined as a separate function if we want to remove it later, because removeEventListener needs the same function reference to remove the listener
+    const handler = () => {
+      console.log('Button clicked with addEventListener!');
+    }
+    mouseButton.addEventListener('click', handler);
+
+    const listenerButton = document.getElementById('listener-button');
+    function removeMouseEventListener() {
+      mouseButton.removeEventListener('click', handler);
+    }
+    listenerButton.onclick = removeMouseEventListener;
+
+    // Syntax with options:
+    //  element.addEventListener(
+    //     'click',   // 1. Event type
+    //     handler,   // 2. Function to run when event happens
+    //     false       // 3. Options (capture or bubble), default: false (bubble)
+    //   );
+    // All the above events i.e. 'onclick', 'onmousemove' etc. use bubbling phase, we can turn on capturing phase there
+
+    // -----------------------
+    // CAPTURING PHASE
+    // Runs from OUTER -> INNER
+    // Third argument = true
+    // -----------------------
+    outer.addEventListener('click', () => {
+      console.log('Outer capture');
+    }, true);
+
+    middle.addEventListener('click', () => {
+      console.log('Middle capture');
+    }, true);
+
+    inner.addEventListener('click', () => {
+      console.log('Inner capture');
+    }, true);
+
+    // -----------------------
+    // BUBBLING PHASE
+    // Runs from INNER -> OUTER
+    // Third argument = false (default)
+    // -----------------------
+    outer.addEventListener('click', () => {
+      console.log('Outer bubble');
+    }, false);
+
+    middle.addEventListener('click', () => {
+      console.log('Middle bubble');
+    }, false);
+
+    inner.addEventListener('click', () => {
+      console.log('Inner bubble');
+    }, false);
+  </script>
+</body>
+
+</html>
