@@ -85,6 +85,384 @@ console.log("5" - 2); // 3
 - console.log(typeof "Ram") // "string"
 - console.log(typeof 42) // "number"
 
+// OR and AND operators in JavaScript
+
+```javascript
+function myOr(a, b, c) {
+  if (a) {
+    return a;
+  } else if (b) {
+    return b;
+  } else {
+    return c;
+  }
+}
+
+function myAnd(a, b, c) {
+  if (!a) {
+    return a;
+  } else if (!b) {
+    return b;
+  } else if (!c) {
+    return c;
+  } else {
+    return c;
+  }
+}
+
+myOr(true, true, false);
+```
+
+You are wondering:
+
+> "Since `c` is `false`, why doesn't the function return `false`?"
+
+Because the function returns **as soon as it finds the first truthy value**.
+
+---
+
+## Your `myOr` Function
+
+```javascript
+function myOr(a, b, c) {
+  if (a) {
+    return a;
+  } else if (b) {
+    return b;
+  } else {
+    return c;
+  }
+}
+```
+
+---
+
+## Call
+
+```javascript
+myOr(true, true, false);
+```
+
+So:
+
+- `a = true`
+- `b = true`
+- `c = false`
+
+---
+
+## Step-by-Step Execution
+
+### Step 1
+
+```javascript
+if (a)
+```
+
+becomes:
+
+```javascript
+if (true)
+```
+
+This is true.
+
+---
+
+### Step 2
+
+```javascript
+return a;
+```
+
+Returns:
+
+```javascript
+true;
+```
+
+---
+
+### Step 3
+
+Function stops immediately.
+
+The rest of the code is never executed.
+
+So:
+
+- `b` is never checked.
+- `c` is never reached.
+
+---
+
+## Why `return` Stops the Function
+
+When JavaScript executes a `return`, the function ends right away.
+
+Example:
+
+```javascript
+function test() {
+  return 5;
+  console.log("This never runs");
+}
+```
+
+---
+
+## Real OR Operator
+
+```javascript
+true || true || false;
+```
+
+JavaScript evaluates left to right.
+
+- First value is `true` (truthy)
+- Return it immediately
+
+Result:
+
+```javascript
+true;
+```
+
+---
+
+## Another Example
+
+```javascript
+myOr(0, "hello", false);
+```
+
+### Step 1
+
+`a = 0` → falsy.
+
+### Step 2
+
+`b = "hello"` → truthy.
+
+### Step 3
+
+Return `"hello"`.
+
+`c` is never checked.
+
+---
+
+## When `c` Is Returned
+
+`c` is returned only when both `a` and `b` are falsy.
+
+Example:
+
+```javascript
+myOr(0, "", false);
+```
+
+- `0` → falsy
+- `""` → falsy
+- return `false`
+
+---
+
+## Summary
+
+For `a || b || c`:
+
+1. If `a` is truthy, return `a`.
+2. Otherwise, if `b` is truthy, return `b`.
+3. Otherwise, return `c`.
+
+---
+
+## Your Example
+
+```javascript
+myOr(true, true, false);
+```
+
+Since `a` is truthy, the function returns `a` immediately.
+
+Final result:
+
+````javascript
+true
+``` */
+
+
+/*
+In an **AND** expression, JavaScript checks values from left to right and returns:
+
+1. The **first falsy value** it finds.
+2. If all values are truthy, it returns the **last value**.
+
+---
+
+## JavaScript `&&`
+
+```javascript
+a && b && c
+````
+
+Equivalent logic:
+
+```javascript
+function myAnd(a, b, c) {
+  if (!a) {
+    return a; // first falsy value
+  } else if (!b) {
+    return b; // first falsy value
+  } else if (!c) {
+    return c; // first falsy value
+  } else {
+    return c; // all truthy → return last value
+  }
+}
+```
+
+---
+
+# Example 1
+
+```javascript
+myAnd(true, true, false);
+```
+
+### Step 1
+
+```javascript
+if (!a)
+```
+
+`!true` → `false`
+
+### Step 2
+
+```javascript
+else if (!b)
+```
+
+`!true` → `false`
+
+### Step 3
+
+```javascript
+else if (!c)
+```
+
+`!false` → `true`
+
+So:
+
+```javascript
+return c;
+```
+
+Returns:
+
+```javascript
+false;
+```
+
+---
+
+# Example 2
+
+```javascript
+true && true && false;
+```
+
+Evaluation:
+
+1. `true` → truthy, continue.
+2. `true` → truthy, continue.
+3. `false` → first falsy value, return it.
+
+Result:
+
+```javascript
+false;
+```
+
+---
+
+# Example 3
+
+```javascript
+myAnd("hello", 5, true);
+```
+
+All values are truthy.
+
+So the final `else` runs:
+
+```javascript
+return c;
+```
+
+Returns:
+
+```javascript
+true;
+```
+
+---
+
+# Example 4
+
+```javascript
+myAnd("hello", 0, true);
+```
+
+- `"hello"` → truthy
+- `0` → falsy
+
+Return:
+
+```javascript
+0;
+```
+
+---
+
+## Visual Rule
+
+### OR (`||`)
+
+> Return the first truthy value.
+
+### AND (`&&`)
+
+> Return the first falsy value.
+
+If no falsy value exists, return the last value.
+
+---
+
+## Comparison Table
+
+| Expression              | Result  | Reason                  |
+| ----------------------- | ------- | ----------------------- |
+| `true && true && false` | `false` | First falsy value       |
+| `true && 5 && "hi"`     | `"hi"`  | All truthy → last value |
+| `0 && "hello"`          | `0`     | First falsy value       |
+| `false && 100`          | `false` | First falsy value       |
+
+---
+
+## Your Question
+
+```javascript
+myAnd(true, true, false);
+```
+
+Returns `false` because `c` is the first falsy value encountered.
+
+\*/
+
 ### 3.What is variables, Why variables are important in JavaScript? and What are the different ways to declare a variable in JavaScript?
 
 - A variable is a named container that holds a value.
