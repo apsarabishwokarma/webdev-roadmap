@@ -6,7 +6,18 @@ This file is used to keep important notes, tips, or reminders related to intervi
 
 Coercion = automatic type conversion.
 Truthiness = whether a value behaves as true or false.
-Only eight falsy values exist.
-Non-empty strings are truthy.
-Empty arrays and objects are truthy.
-Prefer === over ==.
+Only eight falsy values exist.They are:
+
+- false
+- 0
+- -0
+- 0n (BigInt zero)
+- "" (empty string)
+- null
+- undefined
+- NaN
+- All other values are truthy.
+  Non-empty strings are truthy.
+  Empty arrays and objects are truthy.
+  Prefer === over ==.
+- It checks for both value and type, while == allows coercion, which can lead to unexpected results.
