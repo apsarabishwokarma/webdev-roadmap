@@ -1503,6 +1503,68 @@ console.log(fArray.splice(0, 4)); //delete garne ai delete vako nai return
 console.log(fArray);
 ```
 
+### Nested Array in JavaScript
+
+- any array inside another array.
+- A nested array just means an array contains at least one inner array.
+
+let arr = [1, [2, 3], 4];
+
+Here:
+
+arr[0] → 1
+arr[1] → [2, 3]
+arr[2] → 4
+
+This is a nested array because one element is another array.
+
+- An array that contains other arrays as its elements is called a nested array. It allows us to create multi-dimensional data structures.
+- For example:
+  let nestedArray = [
+  [1, 2, 3],
+  ["a", "b", "c"],
+  [true, false, true]
+  ];
+  console.log(nestedArray[0]); // Output: [1, 2, 3]
+  console.log(nestedArray[1][1]); // Output: "b"
+  console.log(nestedArray[2][0]); // Output: true
+
+### Multidimensional Array
+
+- array of arrays.
+- A multidimensional array is an array that contains other arrays as its elements, allowing for the creation of more complex data structures. It can be thought of as an array of arrays. For example:
+
+Multidimensional array: A nested array used to represent data with 2 or more dimensions (rows/columns, grids, matrices).
+
+So:
+Every multidimensional array is a nested array, but not every nested array is treated as a multidimensional array.
+
+Nested Array
+└── Multidimensional Array
+If an array contains another array, it is nested.
+If those nested arrays are treated as dimensions (rows/columns), it is called a multidimensional array.
+
+// difference between callback and higher order function
+
+- A callback function is a function that is passed as an argument to another function and is executed after some operation has been completed. It allows us to handle asynchronous operations and perform actions once a certain task is finished.
+- A higher-order function is a function that takes one or more functions as arguments and/or returns a function as its result. It is a more general concept that encompasses callback functions. Higher-order functions can be used to create more abstract and reusable code by allowing functions to be passed around as first-class
+
+### Matrix:
+
+- a 2D array with equal row sizes.
+- A matrix is a specific type of multidimensional array that has two dimensions (rows and columns) and is typically used to represent mathematical data. In a matrix, each row has the same number of columns, creating a rectangular grid of values. For example:
+  let matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+  ];
+
+// a[i][j] means:
+// first get a[i]
+// then get [j] from that inner array.
+
+1
+
 ### 11. What is the difference between slice and splice in JavaScript?
 
 - The slice() method returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included). It does not modify the original array. For example:
@@ -1676,6 +1738,11 @@ array.reduce(res,curr)=>{
   Takes another function as an parameter, or
   Returns another function.
 
+### Understanding Higher-Order Functions
+
+- Higher-Order Function A function that TAKES another function or RETURNS a function
+- Callback Function The function PASSED INTO another function
+
 ### Recursion in JavaScript
 
 - Recursion is a programming technique where a function calls itself in order to solve a problem.
@@ -1797,7 +1864,7 @@ throw new Error("Input must be a non-negative integer.");
 if (n === 0) return 0;
 if (n === 1) return 1;
 
-let prev = 0;
+let prev = 0;2
 let curr = 1;
 
 for (let i = 2; i <= n; i++) {

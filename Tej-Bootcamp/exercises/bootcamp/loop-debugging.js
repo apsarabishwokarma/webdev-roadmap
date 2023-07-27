@@ -36,7 +36,8 @@ describe("onlyOdds", () => {
 });
 
 /*
-Define a function, crazyCaps, that accepts a string as an argument. crazyCaps should return a string in which every other character is capitalized. The first letter should be lower-cased.
+Define a function, crazyCaps, that accepts a string as an argument. 
+crazyCaps should return a string in which every other character is capitalized. The first letter should be lower-cased.
 
  */
 
@@ -335,30 +336,6 @@ myIndexOf("hello", "eo");
 
 // No match is found. Return -1.
 
-//our earlier mySlice function:
-
-function mySlice(str, start, end) {
-  let result = "";
-
-  for (let i = start; i < end; i++) {
-    result += str[i];
-  }
-
-  return result;
-}
-
-//Then you can use it like this:
-
-function myIndexOf(source, searchValue, startIdx = 0) {
-  for (let i = startIdx; i <= source.length - searchValue.length; i++) {
-    if (mySlice(source, i, i + searchValue.length) === searchValue) {
-      return i;
-    }
-  }
-
-  return -1;
-}
-
 //with using slice method:
 /* Example
 source = "hello"      // length = 5
@@ -427,6 +404,30 @@ describe("myIndexOf", () => {
     expect(returnedValue).toEqual(-1);
   });
 });
+
+//our earlier mySlice function:
+
+function mySlice(str, start, end) {
+  let result = "";
+
+  for (let i = start; i < end; i++) {
+    result += str[i];
+  }
+
+  return result;
+}
+
+//Then you can use it like this:
+
+function myIndexOf(source, searchValue, startIdx = 0) {
+  for (let i = startIdx; i <= source.length - searchValue.length; i++) {
+    if (mySlice(source, i, i + searchValue.length) === searchValue) {
+      return i;
+    }
+  }
+
+  return -1;
+}
 
 /* Define a function, mostVowels, that accepts one argument, a string of words.
 
@@ -544,6 +545,21 @@ console.log(mostVowels("Harry met Peeves.")); // Peeves
 console.log(mostVowels("sky why fly")); // ""
 
 // Another approach to solve this problem
+
+// "aeiou".includes(a)
+
+// checks whether the value stored in a exists anywhere inside the string "aeiou".
+
+// What includes() Does
+
+// includes() is a built-in JavaScript method that answers:
+
+// “Does this string or array contain this value?”
+
+// It always returns:
+
+// true → value is found
+// false → value is not found
 function mostVowels(str) {
   let words = str.split(" ");
   let maxVowels = 0;
