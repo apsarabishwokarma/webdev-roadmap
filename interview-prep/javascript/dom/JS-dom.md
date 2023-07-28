@@ -701,3 +701,13 @@ document.body.appendChild(newDiv);
 let oldDiv = document.getElementById("oldDiv");
 oldDiv.parentNode.removeChild(oldDiv);
 ```
+
+## Virtual DOM in React
+
+- React uses a concept called the Virtual DOM to optimize updates to the actual DOM.
+- The Virtual DOM is a lightweight copy of the real DOM that React uses to track changes.
+- When a component's state changes, React updates the Virtual DOM first, then compares it to the real DOM to determine the most efficient way to update the UI.
+- This process is called "reconciliation" and helps improve performance by minimizing direct manipulations of the real DOM, which can be slow.
+- By using the Virtual DOM, React can efficiently update only the parts of the UI that have changed, rather than re-rendering the entire page.
+- This makes React applications faster and more responsive, especially for complex user interfaces.
+- In summary, the Virtual DOM is a key feature of React that allows for efficient updates to the user interface by minimizing direct interactions with the real DOM.

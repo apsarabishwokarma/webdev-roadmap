@@ -488,3 +488,230 @@ Official Website: https://curl.se
 ```bash
 curl -X GET https://api.example.com/users
 ```
+
+Here’s a simple example of integrating an API in a plain JavaScript application and rendering the data using only **HTML, CSS, and JavaScript** (no React).
+
+This example fetches users from the free API:
+`https://jsonplaceholder.typicode.com/users`
+
+---
+
+# 1. HTML (`index.html`)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Integration Example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>User List</h1>
+
+    <div id="users-container">
+      <!-- Users will be added here -->
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+---
+
+# 2. CSS (`style.css`)
+
+```css
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#users-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.user-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-card h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.user-card p {
+  margin: 5px 0;
+  color: #666;
+}
+```
+
+---
+
+# 3. JavaScript (`script.js`)
+
+```javascript
+// API URL
+const apiUrl = "https://jsonplaceholder.typicode.com/users";
+
+// Select container
+const usersContainer = document.getElementById("users-container");
+
+// Fetch API data
+fetch(apiUrl)
+  .then((response) => response.json())
+  .then((users) => {
+    // Loop through users
+    users.forEach((user) => {
+      // Create div
+      const userCard = document.createElement("div");
+      userCard.classList.add("user-card");
+
+      // Add HTML content
+      userCard.innerHTML = `
+        <h3>${user.name}</h3>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>City:</strong> ${user.address.city}</p>
+      `;
+
+      // Append to container
+      usersContainer.appendChild(userCard);
+    });
+  })
+  .catch((error) => {
+    console.log("Error fetching data:", error);
+  });
+```
+
+---
+
+# How This Works
+
+## Step 1 — `fetch()` sends request to API
+
+```javascript
+fetch(apiUrl);
+```
+
+This requests data from the server.
+
+---
+
+## Step 2 — Convert response to JSON
+
+```javascript
+response.json();
+```
+
+API response comes in JSON format.
+
+---
+
+## Step 3 — Loop through data
+
+```javascript
+users.forEach((user) => {});
+```
+
+Iterates through each user object.
+
+---
+
+## Step 4 — Create HTML dynamically
+
+```javascript
+document.createElement("div");
+```
+
+Creates HTML elements using JavaScript.
+
+---
+
+## Step 5 — Render on webpage
+
+```javascript
+usersContainer.appendChild(userCard);
+```
+
+Adds cards into the webpage.
+
+---
+
+# Output
+
+You’ll see user cards like:
+
+- Name
+- Email
+- City
+
+displayed in a responsive grid layout.
+
+---
+
+# Folder Structure
+
+```plaintext
+project-folder/
+│
+├── index.html
+├── style.css
+└── script.js
+```
+
+---
+
+# Modern Async/Await Version (Cleaner)
+
+You can also write API integration like this:
+
+```javascript
+async function getUsers() {
+  try {
+    const response = await fetch(apiUrl);
+    const users = await response.json();
+
+    users.forEach((user) => {
+      const card = document.createElement("div");
+
+      card.classList.add("user-card");
+
+      card.innerHTML = `
+        <h3>${user.name}</h3>
+        <p>${user.email}</p>
+      `;
+
+      usersContainer.appendChild(card);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getUsers();
+```
+
+---
+
+# Real Applications Use APIs For
+
+- Login systems
+- Weather apps
+- E-commerce products
+- Payment systems
+- Social media feeds
+- Maps & locations
+- Chat applications
