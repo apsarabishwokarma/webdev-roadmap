@@ -646,7 +646,7 @@ Creates HTML elements using JavaScript.
 usersContainer.appendChild(userCard);
 ```
 
-Adds cards into the webpage.
+Adds cards into the webKpage.
 
 ---
 
@@ -715,3 +715,32 @@ getUsers();
 - Social media feeds
 - Maps & locations
 - Chat applications
+
+## GraphQL
+
+- An alternative to REST APIs that allows clients to request only the data they need.
+- Clients can specify the structure of the response, reducing over-fetching and under-fetching of data.
+- Uses a single endpoint for all requests, unlike REST which has multiple endpoints for different resources.
+- Developed by Facebook and widely adopted in modern web applications.
+- Example query:
+
+```graphql
+{
+  user(id: 1) {
+    name
+    email
+  }
+}
+```
+
+## Differences between REST and GraphQL
+
+| Feature        | REST API                                     | GraphQL                                                |
+| -------------- | -------------------------------------------- | ------------------------------------------------------ |
+| Endpoint       | Multiple endpoints for resources             | Single endpoint for all requests                       |
+| Data Fetching  | Fixed data structure                         | Client specifies data structure                        |
+| Over-fetching  | Common issue (fetches more data than needed) | No over-fetching (fetches only requested data)         |
+| Under-fetching | Common issue (fetches less data than needed) | No under-fetching (client can request all needed data) |
+| Versioning     | Versioned APIs (e.g., v1, v2)                | No versioning (schema evolves over time)               |
+| Caching        | Easier to cache responses                    | More complex caching due to flexible queries           |
+| Learning Curve | Easier for beginners                         | Steeper learning curve                                 |

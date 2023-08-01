@@ -1889,3 +1889,12 @@ A palindrome is a word or number that reads the same forward and backward.
 "hello" → not palindrome
 
 ### Check if a String is a Palindrome in JavaScript
+
+### Dynamic and static type languages
+
+- Dynamic typing means that the type of a variable is determined at runtime, and a variable can hold values of different types at different times. JavaScript is a dynamically typed language, which allows for flexibility but can lead to runtime errors if types are not handled carefully.
+  let x = 10; // x is a number
+  x = "Hello"; // x is now a string
+- Static typing means that the type of a variable is determined at compile time, and a variable can only hold values of a specific type. TypeScript is a statically typed language that builds on JavaScript by adding type annotations and compile-time type checking, which can help catch errors before the code is executed.
+  let x: number = 10; // x is a number
+  x = "Hello"; // Error: Type 'string' is not assignable to type 'number'
