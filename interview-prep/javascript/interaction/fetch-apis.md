@@ -42,6 +42,22 @@ json() method : returns a second promise that resolves with the result of parsin
 - Response is in json and it should be converted to js object using json() method.
 - fetch is asynchronous and returns first promise and json() method is also asynchronous and returns second promise.
 
+//using promise chaining
+
+```js
+function getFats() {
+  fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    });
+}
+```
+
+// using async await
+
 ```js
 const getFacts = async () => {
   console.log("Fetching data...");

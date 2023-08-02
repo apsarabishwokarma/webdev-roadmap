@@ -28,12 +28,31 @@
 </head>
 
 <body>
-
+  <p id="fact"> </p>
+  <button id="btn">Get a Fact</button>
   <h1>Users</h1>
 
   <div id="users-container"></div>
 
   <script>
+
+
+    //fetch api data and display on page
+
+    const url = "https://cat-fact.herokuapp.com";
+    const factPara = document.querySelector("#fact");
+    const btn = document.querySelector("#btn");
+
+    const getFacts = async () => {
+      console.log("Fetching data...");
+      let response = await fetch(url);
+      console.log(response);// JSON Format
+      let data = await response.json();
+      console.log(data);// JS Object
+      factPara.innerText = data[0].text;
+    }
+
+    btn.addEventListener("click", getFacts);
     // Select container
     const usersContainer = document.getElementById("users-container");
 
