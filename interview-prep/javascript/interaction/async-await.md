@@ -164,6 +164,19 @@ function getData(data) {
     }, 5000);
   });
 }
+
+Start Async Task
+       ↓
+     Promise
+       ↓
+ ┌─────────────┐
+ │  Pending    │
+ └─────────────┘
+       ↓
+  ┌───────────┴───────────┐
+  ↓                       ↓
+Resolved              Rejected
+
 ```
 
 ### How to use Promises:
@@ -374,3 +387,503 @@ Or using an arrow function:
 ```
 
 - In this example, we are using an IIFE to allow the use of `await` at the top level. The async function is defined and immediately invoked, allowing us to fetch data sequentially without needing to define a separate async function just for this purpose. This makes the code cleaner and more concise.
+
+A **Promise** in JavaScript represents a value that may be available **now, later, or never**.
+
+Think of it as:
+
+```text
+Start Async Task
+       ↓
+     Promise
+       ↓
+ ┌─────────────┐
+ │  Pending    │
+ └─────────────┘
+       ↓
+  ┌───────────┴───────────┐
+  ↓                       ↓
+Resolved              Rejected
+```
+
+---
+
+# Promise States
+
+## 1. Pending Promise
+
+The operation is still running.
+
+```js
+const promise = new Promise((resolve, reject) => {
+  // Still working...
+});
+```
+
+Example:
+
+```js
+const promise = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve("Done");
+  }, 5000);
+});
+```
+
+For the first 5 seconds:
+
+```text
+Promise { <pending> }
+```
+
+---
+
+## 2. Fulfilled (Resolved) Promise
+
+The operation completed successfully.
+
+```js
+const promise = Promise.resolve("Success");
+```
+
+Result:
+
+```text
+Promise { 'Success' }
+```
+
+Example:
+
+```js
+fetchUser().then((user) => {
+  console.log(user);
+});
+```
+
+The promise resolved with:
+
+```js
+{
+  id: 1,
+  name: "John"
+}
+```
+
+---
+
+## 3. Rejected Promise
+
+The operation failed.
+
+```js
+const promise = Promise.reject("Something went wrong");
+```
+
+Example:
+
+```js
+fetchUser().catch((err) => {
+  console.log(err);
+});
+```
+
+Result:
+
+```text
+User not found
+```
+
+---
+
+# Creating a Promise
+
+```js
+const promise = new Promise((resolve, reject) => {
+  const success = true;
+
+  if (success) {
+    resolve("Success");
+  } else {
+    reject("Failed");
+  }
+});
+```
+
+---
+
+# Consuming a Promise
+
+Using `.then()` and `.catch()`:
+
+```js
+promise
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
+
+---
+
+# Async/Await
+
+Instead of:
+
+```js
+promise.then((data) => {
+  console.log(data);
+});
+```
+
+Use:
+
+```js
+const data = await promise;
+console.log(data);
+```
+
+---
+
+# Promise Utility Methods
+
+JavaScript provides several built-in methods for handling multiple promises.
+
+---
+
+# 1. Promise.all()
+
+Runs multiple promises in parallel.
+
+Returns when **all promises succeed**.
+
+If even one fails, everything fails.
+
+```js
+const p1 = Promise.resolve("A");
+const p2 = Promise.resolve("B");
+const p3 = Promise.resolve("C");
+
+const result = await Promise.all([p1, p2, p3]);
+
+console.log(result);
+```
+
+Output:
+
+```js
+["A", "B", "C"];
+```
+
+---
+
+### One Failure
+
+```js
+const p1 = Promise.resolve("A");
+const p2 = Promise.reject("Error");
+const p3 = Promise.resolve("C");
+
+await Promise.all([p1, p2, p3]);
+```
+
+Output:
+
+```text
+Error
+```
+
+Entire operation fails.
+
+---
+
+### Real Example
+
+```js
+const [user, posts, comments] = await Promise.all([
+  getUser(),
+  getPosts(),
+  getComments(),
+]);
+```
+
+All requests run simultaneously.
+
+---
+
+# 2. Promise.allSettled()
+
+Waits for all promises.
+
+Never fails.
+
+Returns success and failure results.
+
+```js
+const result = await Promise.allSettled([
+  Promise.resolve("A"),
+  Promise.reject("Error"),
+]);
+```
+
+Output:
+
+```js
+[
+  {
+    status: "fulfilled",
+    value: "A",
+  },
+  {
+    status: "rejected",
+    reason: "Error",
+  },
+];
+```
+
+---
+
+### Use Case
+
+```text
+Send 100 Emails
+      ↓
+Some succeed
+Some fail
+      ↓
+Need report of all
+```
+
+Use:
+
+```js
+Promise.allSettled();
+```
+
+---
+
+# 3. Promise.race()
+
+Returns the first promise that settles.
+
+Could be success or failure.
+
+```js
+const p1 = new Promise((resolve) => setTimeout(() => resolve("A"), 3000));
+
+const p2 = new Promise((resolve) => setTimeout(() => resolve("B"), 1000));
+
+const result = await Promise.race([p1, p2]);
+
+console.log(result);
+```
+
+Output:
+
+```text
+B
+```
+
+Because it finished first.
+
+---
+
+### Timeout Example
+
+```js
+await Promise.race([fetch(url), timeoutPromise]);
+```
+
+Whichever finishes first wins.
+
+---
+
+# 4. Promise.any()
+
+Returns the first successful promise.
+
+Ignores failures.
+
+```js
+const result = await Promise.any([
+  Promise.reject("Error"),
+  Promise.resolve("Success"),
+]);
+```
+
+Output:
+
+```text
+Success
+```
+
+---
+
+### All Fail
+
+```js
+await Promise.any([Promise.reject("A"), Promise.reject("B")]);
+```
+
+Output:
+
+```text
+AggregateError
+```
+
+---
+
+### Use Case
+
+```text
+Server A
+Server B
+Server C
+
+Take first successful response
+```
+
+Use:
+
+```js
+Promise.any();
+```
+
+---
+
+# 5. Promise.resolve()
+
+Creates an already resolved promise.
+
+```js
+const promise = Promise.resolve("Hello");
+```
+
+Equivalent to:
+
+```js
+const promise = new Promise((resolve) => {
+  resolve("Hello");
+});
+```
+
+---
+
+# 6. Promise.reject()
+
+Creates an already rejected promise.
+
+```js
+const promise = Promise.reject("Error");
+```
+
+Equivalent to:
+
+```js
+const promise = new Promise((_, reject) => {
+  reject("Error");
+});
+```
+
+---
+
+# Comparison Table
+
+| Method                 | Success Condition        | Failure Condition                | Returns         |
+| ---------------------- | ------------------------ | -------------------------------- | --------------- |
+| `Promise.all()`        | All succeed              | Any one fails                    | Array of values |
+| `Promise.allSettled()` | Always completes         | Never throws because of failures | Status objects  |
+| `Promise.race()`       | First settled promise    | First settled promise fails      | First result    |
+| `Promise.any()`        | First successful promise | All fail                         | First success   |
+| `Promise.resolve()`    | Already resolved         | Never                            | Promise         |
+| `Promise.reject()`     | Never                    | Already rejected                 | Promise         |
+
+---
+
+# Visual Summary
+
+```text
+Promise.all()
+
+A ✓
+B ✓
+C ✓
+↓
+Success
+
+A ✓
+B ✗
+C ✓
+↓
+Fail
+```
+
+```text
+Promise.allSettled()
+
+A ✓
+B ✗
+C ✓
+↓
+Returns all results
+```
+
+```text
+Promise.race()
+
+A (3 sec)
+B (1 sec)
+C (5 sec)
+
+↓
+
+B wins
+```
+
+```text
+Promise.any()
+
+A ✗
+B ✗
+C ✓
+
+↓
+
+C wins
+```
+
+---
+
+# Most Common Backend Usage
+
+### Multiple Database/API Calls
+
+```js
+const [user, orders, products] =
+  await Promise.all([
+    prisma.user.findUnique(...),
+    prisma.order.findMany(...),
+    prisma.product.findMany(...),
+  ]);
+```
+
+### Email Processing
+
+```js
+await Promise.allSettled(users.map(sendEmail));
+```
+
+### API Timeout
+
+```js
+await Promise.race([fetchData(), timeout()]);
+```
+
+### Multi-Server Fallback
+
+```js
+await Promise.any([fetchServer1(), fetchServer2(), fetchServer3()]);
+```
+
+These four (`Promise.all`, `Promise.allSettled`, `Promise.race`, and `Promise.any`) are the ones you'll encounter most often in real-world Node.js, Express, and backend development.
